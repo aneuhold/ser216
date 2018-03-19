@@ -1,24 +1,29 @@
 package assignment1;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
 /**
- * Takes user input from the console as a series of values to determine
- * if the values make a magic square matrix. This program will print
+ * A simple magic square checker that takes console input from the user. 
+ * This accept a series of space delimited values to determine
+ * if the values make a magic square matrix. This will print
  * "true" if it is a magic square and "false" if it is not.
  * 
  * @author Anton G Neuhold Jr
- * @date 2018-03-17
+ * @version 1.1, Date: 2018/03/18
  */
 public class MagicSquare {
   private final static int INITIAL_ARRAY_SIZE = 10;
 
   /**
-   * This is the main method and provides the user interaction point
-   * for the program.
+   * Takes input from the user through the console which is then checked 
+   * for integers, the proper number of input values, and that each number 
+   * occurs once, then returns a boolean value whether or not the input
+   * formed a magic square.
+   * 
+   * @param args the <code>String[]</code> command line arguments. These 
+   * are not used. 
    */
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
@@ -26,7 +31,7 @@ public class MagicSquare {
     
     while (run == true) {
       int[][] intMatrix;
-      int[] intArray = new int[INITIAL_ARRAY_SIZE];
+      int[] intArray = null;
       int intCount = 0;
       
       // Printing the description of the magic square for the user
@@ -96,12 +101,10 @@ public class MagicSquare {
   }
 
   /**
-   * Tests a provided n x n matrix and tests to see if it is a magic square
-   * which means that all row's sum are the same, all column's sums are the
-   * same, and that both diagonal's sums are the same. 
+   * Tests a provided n x n matrix to see if it is a magic square.
    * 
-   * @param intMatrix
-   * @return true if the matrix is a magic square.
+   * @param intMatrix the <code>int[][]</code> to be tested as a magic square
+   * @return <code>true</code> if the <code>intMatrix</code> is a magic square
    */
   private static boolean testForMagicSquare(int[][] intMatrix) {
     int previousRowSum = 0;
@@ -146,12 +149,17 @@ public class MagicSquare {
   }
 
   /**
-   * Creates a matrix from the provided array up to the index intCount - 1.
-   * The matrix column length and row length are the square root of intCount.
+   * Creates a matrix from the provided array using the first 
+   * <code>intCount</code> values of the array.
+   * The matrix column length and row length created will be 
+   * the square root of <code>intCount</code> rounded down so that it forms an
+   * n x n matrix.
    * 
-   * @param intCount
-   * @param intArray
-   * @return the completed matrix as a 2D int array
+   * @param intCount the <code>int</code> representing the number of values to
+   * take from the <code>intArray</code> starting at index 0
+   * @param intArray the <code>int[]</code> to be converted to an n x n matrix
+   * @return the <code>int[][]</code> n x n matrix converted from the first
+   * <code>intCount</code> values of <code>intArray</code>
    */
   private static int[][] convertArrayToMatrix(int intCount, int[] intArray) {
     int matrixSize = ((Double) Math.floor(Math.sqrt(intCount))).intValue();
@@ -167,15 +175,17 @@ public class MagicSquare {
   }
 
   /**
-   * Searches the provided array up to the index calculated by numValues - 1
-   * for repeating values. If a repeating value is found, this method returns
-   * false.
+   * Searches the first <code>numValues</code> of <code>array</code> for
+   * repeating values and returns <code>true</code> if none are found.
+   * <p>
+   * This operates in O(n).
    * 
-   * This method is O(n)
-   * 
-   * @param numValues
-   * @param array
-   * @return true when all values up to the numValues - 1 index are unique
+   * @param numValues the <code>int</code> representing the number of values to
+   * search from the <code>array</code> starting at index 0
+   * @param array the <code>int[]</code> to search for repeating values
+   * @return <code>true</code> if the first <code>numValues</code> of 
+   * <code>array</code> have no repeating values and <code>false</code>
+   * otherwise
    */
   private static boolean valuesAreUnique(int numValues, int[] array) {
     Set<Integer> intSet = new HashSet<Integer>();
