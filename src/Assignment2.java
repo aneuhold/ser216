@@ -162,9 +162,12 @@ public class Assignment2 extends JFrame {
    */
   private int parseBinary(String binaryString) throws NumberFormatException {
     binaryString = binaryString.trim();
+    int decimalValue;
     
     // Throws an exception if the string is incorrect and describes why.
-    if (!binaryString.matches("([10])+")) {
+    if (binaryString.equals("")) {
+      decimalValue = 0;
+    } else if (!binaryString.matches("([10])+")) {
       HashSet<Character> invalidChars = new HashSet<Character>();
       for (int i = 0; i < binaryString.length(); i++) {
         if (binaryString.charAt(i) != '0' &&
@@ -178,9 +181,10 @@ public class Assignment2 extends JFrame {
         errorString += c;
       }
       throw new NumberFormatException(errorString);
+    } else {
+      decimalValue = Integer.parseInt(binaryString, 2);
     }
-    int decimalString = Integer.parseInt(binaryString, 2);
-    return decimalString;
+    return decimalValue;
   }
   
   /**
@@ -192,21 +196,13 @@ public class Assignment2 extends JFrame {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      
-      // Checks if there are any characters.
-      if (textFieldBinaryString.getText().length() == 0) {
         
-        // If there aren't any characters, asks for a binary value.
-        textFieldDecimalString.setText("Please enter a binary value.");
-      } else {
-        
-        // Attempts to convert the value
-        try {
-          int decimalValue = parseBinary(textFieldBinaryString.getText());
-          textFieldDecimalString.setText("" + decimalValue);
-        } catch (NumberFormatException exception) {
-          textFieldDecimalString.setText(exception.getMessage());
-        }
+      // Attempts to convert the value
+      try {
+        int decimalValue = parseBinary(textFieldBinaryString.getText());
+        textFieldDecimalString.setText("" + decimalValue);
+      } catch (NumberFormatException exception) {
+        textFieldDecimalString.setText(exception.getMessage());
       }
     }
     
