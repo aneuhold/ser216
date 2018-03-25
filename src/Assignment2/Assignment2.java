@@ -1,3 +1,5 @@
+package Assignment2;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -152,13 +154,13 @@ public class Assignment2 extends JFrame {
    * Attempts to convert the provided binary value <code>String</code>
    * to an <code>int</code> and throws an exception if it is in the incorrect
    * format. If an error is thrown, the exception message will contain details
-   * on what caused the error in the string. 
+   * of what caused the error in the string. Returns 0 if string is empty.
    * 
    * @param binaryString the <code>String</code> containing the supposed binary
    * value
-   * @return An <code>int</code> representing the decimal value of the 
-   * binary string
-   * @throws NumberFormatException If the string is not a binary string
+   * @return an <code>int</code> representing the decimal value of the 
+   * binary string, or 0 if the binary string is empty
+   * @throws NumberFormatException if the string is not a binary string
    */
   private int parseBinary(String binaryString) throws NumberFormatException {
     binaryString = binaryString.trim();
